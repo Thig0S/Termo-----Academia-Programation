@@ -7,13 +7,15 @@ class Program
     static void Main(string[] args)
     {
         ExibirMenu();
+        PressioneEnter();
+        Console.Clear();
 
         string palavraTermo = GerarPalavraTermo();
-
-        string placeholder = "_ _ _ _ _";
+        System.Console.WriteLine(palavraTermo);
 
         for (int tentativas = 1; tentativas <= 5; tentativas++)
         {
+            System.Console.WriteLine($"\nTENTATIVA {tentativas} de 5!");
             System.Console.Write("Digite uma palavra: ");
             string? usuarioInput = Console.ReadLine()?.ToLower();
 
@@ -25,7 +27,32 @@ class Program
                 continue;
             }
 
-
+            // verificar se as letras tem na palavra aleatoria do TERMO 
+            for (int i = 0; i < palavraTermo.Length; i++)
+            {
+                //Verificar letra por letra do input do usuario
+                if (palavraTermo[i] == usuarioInput[i])
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.Write($"{usuarioInput[i]}");
+                    Console.ResetColor();
+                }
+            }
+            for (int i = 0; i < palavraTermo.Length; i++)
+            {
+                if (palavraTermo.Contains(usuarioInput[i]))
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    System.Console.Write(usuarioInput[i]);
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.Write(usuarioInput[i]);
+                    Console.ResetColor();
+                }
+            }
         }
     }
 
@@ -61,7 +88,7 @@ class Program
 };
         int n = RandomNumberGenerator.GetInt32(1, palavras.Length);
 
-        return palavras[0];
+        return palavras[n];
     }
 
     static bool VerificarPalavraValida(string palavra)
@@ -77,6 +104,5 @@ class Program
     {
         System.Console.WriteLine("Pressione ENTER para continuar");
         Console.ReadLine();
-        Console.Clear();
     }
 }
