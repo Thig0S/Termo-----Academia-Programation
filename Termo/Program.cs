@@ -11,7 +11,7 @@ class Program
         Console.Clear();
 
         string palavraTermo = GerarPalavraTermo();
-        System.Console.WriteLine(palavraTermo);
+
 
         for (int tentativas = 1; tentativas <= 5; tentativas++)
         {
@@ -26,7 +26,13 @@ class Program
                 tentativas--;
                 continue;
             }
-
+            if (palavraTermo == usuarioInput)
+            {
+                System.Console.WriteLine("PARABENS VOCE ACERTOU! A palavra era " + palavraTermo);
+                System.Console.WriteLine("Obrigado por jogar.");
+                PressioneEnter();
+                break;
+            }
             // verificar se as letras tem na palavra aleatoria do TERMO 
             for (int i = 0; i < palavraTermo.Length; i++)
             {
@@ -37,19 +43,16 @@ class Program
                     System.Console.Write($"{usuarioInput[i]}");
                     Console.ResetColor();
                 }
-            }
-            for (int i = 0; i < palavraTermo.Length; i++)
-            {
-                if (palavraTermo.Contains(usuarioInput[i]))
+                else if (palavraTermo.Contains(usuarioInput[i]))
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    System.Console.Write(usuarioInput[i]);
+                    System.Console.Write($"{usuarioInput[i]}");
                     Console.ResetColor();
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.Write(usuarioInput[i]);
+                    System.Console.Write($"{usuarioInput[i]}");
                     Console.ResetColor();
                 }
             }
