@@ -2,16 +2,80 @@
 
 namespace Termo;
 
+class JogoTermo
+{
+    public string? PalavraTermo { get; private set; }
+
+    public void GerarPalavraTermo()
+    {
+        string[] palavras = {
+                "amigo",
+                "casas",
+                "livro",
+                "praia",
+                "verde",
+                "nuvem",
+                "carta",
+                "festa",
+                "pedra",
+                "fruta",
+                "sonho",
+                "folha",
+                "porta",
+                "campo",
+                "trigo",
+                "piano",
+                "mundo",
+                "linha",
+                "plano",
+                "chave"
+};
+        int n = RandomNumberGenerator.GetInt32(1, palavras.Length);
+
+        PalavraTermo = palavras[n];
+    }
+}
 class Program
 {
     static void Main(string[] args)
     {
         ExibirMenu();
+
+        string palavraTermo = JogoTermo.GerarPalavraTermo();
+
+        bool jogadorVenceu = ComecarJogo(palavraTermo);
+
+        MensagemFinal(jogadorVenceu, palavraTermo);
+    }
+
+    static void ExibirMenu()
+    {
+        Console.WriteLine("----------------");
+        Console.WriteLine("Bem-vindo ao Termo TK");
+        Console.WriteLine("----------------");
         PressioneEnter();
         Console.Clear();
+    }
 
-        string palavraTermo = GerarPalavraTermo();
 
+    static bool VerificarPalavraValida(string palavra)
+    {
+        if (palavra.Length != 5)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    static void PressioneEnter()
+    {
+        System.Console.WriteLine("Pressione ENTER para continuar");
+        Console.ReadLine();
+    }
+
+    static bool ComecarJogo(string palavraTermo)
+    {
+        bool jogadorVenceu = false;
 
         for (int tentativas = 1; tentativas <= 5; tentativas++)
         {
@@ -28,9 +92,7 @@ class Program
             }
             if (palavraTermo == usuarioInput)
             {
-                System.Console.WriteLine("PARABENS VOCE ACERTOU! A palavra era " + palavraTermo);
-                System.Console.WriteLine("Obrigado por jogar.");
-                PressioneEnter();
+                jogadorVenceu = true;
                 break;
             }
             // verificar se as letras tem na palavra aleatoria do TERMO 
@@ -57,55 +119,21 @@ class Program
                 }
             }
         }
+        return jogadorVenceu;
     }
 
-    static void ExibirMenu()
+    static void MensagemFinal(bool jogadorVenceu, string palavraTermo)
     {
-        Console.WriteLine("----------------");
-        Console.WriteLine("Bem-vindo ao Termo TK");
-        Console.WriteLine("----------------");
-    }
-    static string GerarPalavraTermo()
-    {
-        string[] palavras = {
-                "amigo",
-                "casas",
-                "livro",
-                "praia",
-                "verde",
-                "nuvem",
-                "carta",
-                "festa",
-                "pedra",
-                "fruta",
-                "sonho",
-                "folha",
-                "porta",
-                "campo",
-                "trigo",
-                "piano",
-                "mundo",
-                "linha",
-                "plano",
-                "chave"
-};
-        int n = RandomNumberGenerator.GetInt32(1, palavras.Length);
-
-        return palavras[n];
-    }
-
-    static bool VerificarPalavraValida(string palavra)
-    {
-        if (palavra.Length != 5)
+        if (jogadorVenceu)
         {
-            return false;
+            System.Console.WriteLine("\nParabens você acertou! A palavra era " + palavraTermo);
+            PressioneEnter();
         }
-        return true;
-    }
-
-    static void PressioneEnter()
-    {
-        System.Console.WriteLine("Pressione ENTER para continuar");
-        Console.ReadLine();
+        else
+        {
+            System.Console.WriteLine("\nVoce perdeu! A palavra era " + palavraTermo);
+            PressioneEnter();
+        }
+        System.Console.WriteLine("Obrigado por Jogar!");
     }
 }
