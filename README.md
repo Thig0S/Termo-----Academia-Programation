@@ -76,4 +76,4 @@ Essa organização torna o projeto ideal para estudos e evolução futura.
 
 ## 👨‍💻 Autor
 
-Achei que Seria mais Dificil 💯 || Projeto desenvolvido por **Thiago Kovalski**
+Projeto desenvolvido por **Thiago Kovalski**
